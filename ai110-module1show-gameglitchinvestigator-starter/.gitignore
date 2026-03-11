@@ -1,0 +1,3 @@
+### Folder-specific (root .gitignore covers common Python/OS/editor ignores)
+.streamlit/secrets.toml
+nosetests.xml
