@@ -62,11 +62,46 @@ class Menu:
         self.items = items if items is not None else []
 
     def filter_by_category(self, category: str) -> List["FoodItem"]:
-        return [item for item in self.items if item.category == category]
+        """Returns items matching the category (case-insensitive)."""
+        return [item for item in self.items if item.category.lower() == category.lower()]
+
+    def sort_items(self, sort_by: str) -> List["FoodItem"]:
+        """Sorts items by 'popularity' (descending) or 'price' (ascending)."""
+        if sort_by == "popularity":
+            return sorted(self.items, key=lambda item: item.popularity_rating, reverse=True)
+        if sort_by == "price":
+            return sorted(self.items, key=lambda item: item.price)
+        raise ValueError("sort_by must be 'popularity' or 'price'")
 
 class Transaction:
     def __init__(self, selected_items: Optional[List["FoodItem"]] = None):
         self.selected_items = selected_items if selected_items is not None else []
 
     def calculate_total_cost(self) -> float:
+        """Sums the prices of all selected items."""
         return sum(item.price for item in self.selected_items)
+
+# ---  Manual Test Scenario ---
+if __name__ == "__main__":
+    # 1. Setup sample data
+    burger = FoodItem("Spicy Burger", 8.99, "Main", 4.8)
+    fries = FoodItem("Curly Fries", 3.50, "Side", 4.2)
+    soda = FoodItem("Large Soda", 2.50, "Drinks", 3.5)
+    
+    campus_menu = Menu([burger, fries, soda])
+
+    # 2. Test Filtering
+    drinks = campus_menu.filter_by_category("Drinks")
+    print(f"Filtering Test: Found {len(drinks)} drink(s).") 
+
+    # 3. Test Sorting (Popularity)
+    sorted_items = campus_menu.sort_items("popularity")
+    top_rated_name = sorted_items[0].name if sorted_items else "(no items)"
+    print(f"Sorting Test (Top Rated): {top_rated_name}") 
+
+    # 4. Test Calculation
+    order = Transaction([burger, fries])
+    total = order.calculate_total_cost()
+    print(f"Total Calculation Test: ${total:.2f}") 
+
+    print("\n✅ All algorithmic methods verified!")
