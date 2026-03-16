@@ -1,0 +1,23 @@
+{
+  "name": "Jordan",
+  "available_time": 60,
+  "pets": [
+    {
+      "name": "Mochi",
+      "species": "dog",
+      "age": 2,
+      "tasks": [
+        {
+          "name": "Morning walk",
+          "category": "walk",
+          "duration": 20,
+          "priority": 1,
+          "completed": true,
+          "scheduled_time": "",
+          "frequency": "once",
+          "due_date": null
+        }
+      ]
+    }
+  ]
+}
