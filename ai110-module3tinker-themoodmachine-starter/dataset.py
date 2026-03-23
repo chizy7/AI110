@@ -23,6 +23,15 @@ POSITIVE_WORDS = [
     "chill",
     "relaxed",
     "amazing",
+    "proud",
+    "best",
+    "wonderful",
+    "fantastic",
+    "happier",
+    "hopeful",
+    "beautiful",
+    "thankful",
+    "grateful",
 ]
 
 NEGATIVE_WORDS = [
@@ -36,6 +45,15 @@ NEGATIVE_WORDS = [
     "stressed",
     "hate",
     "boring",
+    "worst",
+    "exhausted",
+    "failed",
+    "miserable",
+    "frustrated",
+    "annoyed",
+    "depressed",
+    "stuck",
+    "hard",
 ]
 
 # ---------------------------------------------------------------------
@@ -50,6 +68,21 @@ SAMPLE_POSTS = [
     "This is fine",
     "So excited for the weekend",
     "I am not happy about this",
+    # --- new posts below ---
+    "lowkey stressed but we move 💀",
+    "this song is absolute fire no cap 🔥",
+    "I absolutely love sitting in traffic for two hours",
+    "ngl today was mid at best",
+    "just got the internship offer omggg 😭🎉",
+    "idk how to feel about this whole situation tbh",
+    "why does everything have to be so hard bruh 😩",
+    "vibes are immaculate today honestly chill day 😌",
+    # --- round 2: extra posts for model comparison ---
+    "I'm not even mad just disappointed",
+    "can't complain life is decent rn",
+    "lmaooo this group project is a disaster 💀😂",
+    "honestly just grateful to be here ❤️",
+    "pain but make it aesthetic 🥲",
 ]
 
 # Human labels for each post above.
@@ -65,6 +98,21 @@ TRUE_LABELS = [
     "neutral",   # "This is fine"
     "positive",  # "So excited for the weekend"
     "negative",  # "I am not happy about this"
+    # --- new labels below ---
+    "mixed",     # "lowkey stressed but we move 💀" — stressed but resilient
+    "positive",  # "this song is absolute fire no cap 🔥" — slang praise
+    "negative",  # "I absolutely love sitting in traffic..." — sarcasm
+    "negative",  # "ngl today was mid at best" — disappointed
+    "positive",  # "just got the internship offer omggg 😭🎉" — happy tears
+    "neutral",   # "idk how to feel about this whole situation tbh" — uncertain
+    "negative",  # "why does everything have to be so hard bruh 😩" — frustrated
+    "positive",  # "vibes are immaculate today honestly chill day 😌" — relaxed/happy
+    # --- round 2 labels ---
+    "negative",  # "I'm not even mad just disappointed" — negative despite denying anger
+    "positive",  # "can't complain life is decent rn" — understated positive
+    "mixed",     # "lmaooo this group project is a disaster 💀😂" — laughing at misery
+    "positive",  # "honestly just grateful to be here ❤️" — sincere gratitude
+    "mixed",     # "pain but make it aesthetic 🥲" — ironic self-aware sadness
 ]
 
 # TODO: Add 5-10 more posts and labels.
