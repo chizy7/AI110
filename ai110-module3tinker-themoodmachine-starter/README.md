@@ -65,3 +65,13 @@ During this lab you will:
 - When debugging, print tokens, scores, or intermediate choices.
 - Ask an AI assistant to help create edge case posts or unusual wording.
 - Try examples that mislead or confuse your model. Failure cases teach you the most.
+
+---
+
+## TF Summary
+
+The core idea in this module is helping students see how rule-based and ML-based text classifiers actually make decisions, and more importantly, why neither of them is magic. Where students tend to get stuck is that gap between how a human reads a sentence and how a model processes it. Things like sarcasm, subtle tone, or even emojis completely break that illusion because the model is really just looking at patterns, not intent.
+
+AI (Copilot) was helpful in some very real ways. It made it easier to come up with realistic, slang-heavy examples, and it did a good job walking through how tokenization and scoring flow through the system. It also helped surface why certain predictions were failing. But it also had moments where it sounded very confident while suggesting fixes that actually made things worse, especially with edge cases. So every suggestion had to be grounded in testing, not just accepted at face value.
+
+If I were helping a student who is stuck on sarcasm, I would slow them down and have them print out the tokens and the score for that sentence. Then I would ask: which word is actually driving this prediction, and does the model have any way to understand that the speaker does not mean it literally? That usually clicks. It shifts them from thinking the model is “wrong” to understanding the limitation of how it works.
