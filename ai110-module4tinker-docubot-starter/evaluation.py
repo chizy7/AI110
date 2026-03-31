@@ -69,7 +69,10 @@ def evaluate_retrieval(bot, top_k=3):
 
         retrieved_files = [fname for fname, _ in retrieved]
 
-        hit = any(f in retrieved_files for f in expected) if expected else False
+        hit = any(
+            any(rf.startswith(f) for rf in retrieved_files)
+            for f in expected
+        ) if expected else False
         if hit:
             hits += 1
 
