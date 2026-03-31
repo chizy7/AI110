@@ -10,7 +10,7 @@ class MockClient:
 
     def complete(self, system_prompt: str, user_prompt: str) -> str:
         # Very small, predictable behavior for demos.
-        if "Return ONLY valid JSON" in system_prompt:
+        if "JSON" in system_prompt:
             # Purposely not JSON to force fallback unless students change behavior.
             return "I found some issues, but I'm not returning JSON right now."
         return "# MockClient: no rewrite available in offline mode.\n"
@@ -43,23 +43,19 @@ class GeminiClient:
         """
         Sends a single request to Gemini.
 
-        UPDATED: Added try/except to handle rate limits and API errors gracefully.
-        If an error occurs, it returns an empty string, triggering the agent's 
-        heuristic fallback logic.
+        Combines system and user prompts into a single message since
+        Gemini's generate_content API does not support a "system" role
+        in the content list format.
         """
+        combined = f"{system_prompt}\n\n{user_prompt}"
         try:
             response = self.model.generate_content(
-                [
-                    {"role": "system", "parts": [system_prompt]},
-                    {"role": "user", "parts": [user_prompt]},
-                ],
+                combined,
                 generation_config={"temperature": self.temperature},
             )
+            return (response.text or "").strip()
 
-            # Defensive: response.text can be None or raise an error if blocked by filters.
-            return response.text or ""
-            
         except Exception as e:
-            # Returning empty string allows the agent to detect the failure 
-            # and switch to offline rules.
+            # Return empty string so the agent can detect failure
+            # and fall back to heuristic mode.
             return ""

@@ -62,6 +62,14 @@ def assess_risk(
         score -= 5
         reasons.append("Bare except was modified, verify correctness.")
 
+    # Check if fix introduces new import statements not in the original.
+    original_imports = {l.strip() for l in original_lines if l.strip().startswith(("import ", "from "))}
+    fixed_imports = {l.strip() for l in fixed_lines if l.strip().startswith(("import ", "from "))}
+    new_imports = fixed_imports - original_imports
+    if new_imports:
+        score -= 10
+        reasons.append(f"New imports added: {', '.join(sorted(new_imports))}. Verify dependencies.")
+
     # ----------------------------
     # Clamp score
     # ----------------------------
@@ -80,7 +88,10 @@ def assess_risk(
     # ----------------------------
     # Auto-fix policy
     # ----------------------------
-    should_autofix = level == "low"
+    has_high_severity = any(
+        str(i.get("severity", "")).lower() == "high" for i in issues
+    )
+    should_autofix = level == "low" and not has_high_severity
 
     if not reasons:
         reasons.append("No significant risks detected.")
